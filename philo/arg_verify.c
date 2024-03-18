@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:28:15 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/03/18 19:58:10 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/03/18 20:02:29 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <limits.h>
 #include "philo.h"
 
-_Bool	check_numbers(int argc, char **argv)
+_Bool	validate_numbers(int argc, char **argv)
 {
 	int	i;
 	int	n;
@@ -24,7 +24,7 @@ _Bool	check_numbers(int argc, char **argv)
 	while (i < argc)
 	{
 		n = satoi(argv[i]);
-		if (n <= 0 || n > INT_MAX)
+		if (n == 0 || n > INT_MAX)
 			return (0);
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 16:37:11 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/03/18 18:37:18 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/03/18 20:01:47 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	if (!is_digits(argc, argv))
 		return (EXIT_FAILURE);
-	if (!main_logic(argc, argv))
+	if (!validate_numbers(argc, argv))
 		return (EXIT_FAILURE);
+	main_logic(argc, argv);
 	return (EXIT_SUCCESS);
 }
