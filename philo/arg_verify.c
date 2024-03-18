@@ -6,22 +6,25 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:28:15 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/03/18 19:45:57 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/03/18 19:58:10 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 #include <stdio.h>
+#include <limits.h>
 #include "philo.h"
 
 _Bool	check_numbers(int argc, char **argv)
 {
 	int	i;
+	int	n;
 
 	i = 1;
 	while (i < argc)
 	{
-		if (satoi(argv[i]) <= 0)
+		n = satoi(argv[i]);
+		if (n <= 0 || n > INT_MAX)
 			return (0);
 		i++;
 	}
