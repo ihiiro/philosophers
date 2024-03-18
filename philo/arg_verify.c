@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:28:15 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/03/18 20:02:29 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/03/18 20:11:36 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 
 _Bool	validate_numbers(int argc, char **argv)
 {
-	int	i;
-	int	n;
+	int		i;
+	long	n;
 
 	i = 1;
 	while (i < argc)
