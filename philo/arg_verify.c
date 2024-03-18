@@ -6,12 +6,27 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:28:15 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/03/18 18:30:58 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/03/18 19:45:57 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/_types/_int8_t.h>
 #include <stddef.h>
+#include <stdio.h>
+#include "philo.h"
+
+_Bool	check_numbers(int argc, char **argv)
+{
+	int	i;
+
+	i = 1;
+	while (i < argc)
+	{
+		if (satoi(argv[i]) <= 0)
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 int	real_argc(int argc)
 {
