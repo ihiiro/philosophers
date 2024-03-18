@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/18 16:37:11 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/03/18 18:37:18 by yel-yaqi         ###   ########.fr       */
+/*   Created: 2024/03/18 17:31:11 by yel-yaqi          #+#    #+#             */
+/*   Updated: 2024/03/18 18:31:07 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "philo.h"
+#ifndef PHILO_H
+# define PHILO_H
 
-int	main(int argc, char **argv)
-{
-	if (real_argc(argc) > 5 || real_argc(argc) < 4)
-		return (EXIT_FAILURE);
-	if (!is_digits(argc, argv))
-		return (EXIT_FAILURE);
-	if (!main_logic(argc, argv))
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
-}
+int		real_argc(int argc);
+
+_Bool	is_digits(int argc, char **argv);
+
+#endif
