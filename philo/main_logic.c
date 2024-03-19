@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 19:47:33 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/03/19 18:49:50 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/03/19 20:54:47 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,15 @@ static void	report(int id, int flag, long start_ms)
 	long	timestamp_ms;
 
 	timestamp_ms = get_time() - start_ms;	
-	if (flag == -1)
-		printf("%ld %d is active\n", timestamp_ms, id);
-	else if (flag == 4)
+	// if (flag == -1)
+	// 	printf("%ld %d is active\n", timestamp_ms, id);
+	if (flag == 4)
 		printf("%ld %d has taken a fork\n", timestamp_ms, id);
 	else if (flag == 1)
+	{
+		printf("%ld %d has taken a fork\n", timestamp_ms, id);
 		printf("%ld %d is eating\n", timestamp_ms, id);
+	}
 	else if (flag == 2)
 		printf("%ld %d is sleeping\n", timestamp_ms, id);
 	else if (flag == 3)

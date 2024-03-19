@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:31:11 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/03/19 18:46:49 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/03/19 20:46:41 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_threads
 	int				flag;
 	pthread_mutex_t	flag_mutex;
 	t_sim_values	sim_values;
+	int				id;
 }				t_threads;
 
 typedef struct s_cleanup
