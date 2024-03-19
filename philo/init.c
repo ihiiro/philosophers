@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 20:21:22 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/03/19 16:22:43 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/03/19 16:47:49 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_threads	*init_threads(t_sim_values sim_values, t_cleanup *cleanup)
 	cleanup->forks = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * sim_values.n);
 	while (++i < sim_values.n)
 	{
+		cleanup->threads[i].sim_values = sim_values;
 		cleanup->threads[i].left_fork = &cleanup->forks[i];
 		if (i + 1 == sim_values.n)
 			cleanup->threads[i].right_fork = &cleanup->forks[0];
