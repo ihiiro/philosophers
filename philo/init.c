@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 20:21:22 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/03/19 16:47:49 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/03/19 18:44:37 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ t_threads	*init_threads(t_sim_values sim_values, t_cleanup *cleanup)
 		pthread_mutex_init(&cleanup->threads->flag_mutex, NULL);
 		pthread_mutex_init(&cleanup->forks[i], NULL);
 		pthread_create(&cleanup->threads[i].thread, NULL, routine, &cleanup->threads[i]);
+		msleep(1);
 		pthread_detach(cleanup->threads[i].thread);
 	}
 	return (cleanup->threads);

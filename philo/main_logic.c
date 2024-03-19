@@ -6,23 +6,15 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 19:47:33 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/03/19 17:11:38 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/03/19 18:49:50 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <sys/time.h>
+#include <string.h>
 #include "philo.h"
-
-static long	get_time(void)
-{
-	struct timeval	tv;
-	long			timestamp_ms;
-
-	gettimeofday(&tv, NULL);
-	timestamp_ms = tv.tv_sec * 1000 + tv.tv_usec / 1000;
-	return (timestamp_ms);
-}
 
 static void	report(int id, int flag, long start_ms)
 {
@@ -31,25 +23,35 @@ static void	report(int id, int flag, long start_ms)
 	timestamp_ms = get_time() - start_ms;	
 	if (flag == -1)
 		printf("%ld %d is active\n", timestamp_ms, id);
-	else if (flag == 0)
-		printf("%ld %d is eating\n", timestamp_ms, id);
+	else if (flag == 4)
+		printf("%ld %d has taken a fork\n", timestamp_ms, id);
 	else if (flag == 1)
-		printf("%ld %d is sleeping\n", timestamp_ms, id);
+		printf("%ld %d is eating\n", timestamp_ms, id);
 	else if (flag == 2)
+		printf("%ld %d is sleeping\n", timestamp_ms, id);
+	else if (flag == 3)
 		printf("%ld %d is thinking\n", timestamp_ms, id);
 }
 
 static void	launch_monitor(t_sim_values *sim_values, t_threads *threads, long start_ms)
 {
 	int	i;
+	int	*prev_flag_vals;
 
+	prev_flag_vals = (int *)malloc(sizeof(int) * sim_values->n);
+	memset(prev_flag_vals, 0, sizeof(int) * sim_values->n);
 	while (1)
 	{
 		i = -1;
 		while (++i < sim_values->n)
 		{
 			pthread_mutex_lock(&threads[i].flag_mutex);
-			report(i + 1, threads[i].flag, start_ms);
+			if (threads[i].flag != prev_flag_vals[i])
+			{
+				report(i + 1, threads[i].flag, start_ms);
+				prev_flag_vals[i] = threads[i].flag;
+				threads[i].flag = -2;
+			}
 			pthread_mutex_unlock(&threads[i].flag_mutex);
 		}
 	}
