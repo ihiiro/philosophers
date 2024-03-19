@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:28:15 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/03/18 20:11:36 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/03/18 20:28:16 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ _Bool	is_digits(int argc, char **argv)
 	int		argc_iter;
 
 	argc = real_argc(argc);
-	argc_iter = 0;
-	while (argc_iter++ < argc)
+	argc_iter = 1;
+	while (argc_iter < argc)
 	{
 		argv_iter = 0;
 		while (argv[argc_iter][argv_iter])
@@ -55,6 +55,7 @@ _Bool	is_digits(int argc, char **argv)
 				return (0);
 			argv_iter++;
 		}
+		argc_iter++;
 	}
 	return (1);
 }
