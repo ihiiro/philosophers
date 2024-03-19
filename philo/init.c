@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 20:21:22 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/03/19 15:37:57 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/03/19 16:22:43 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include "philo.h"
 
-t_threads	*init_thread_values(t_sim_values sim_values, t_cleanup *cleanup)
+t_threads	*init_threads(t_sim_values sim_values, t_cleanup *cleanup)
 {
 	int	i;
 
@@ -28,6 +28,8 @@ t_threads	*init_thread_values(t_sim_values sim_values, t_cleanup *cleanup)
 			cleanup->threads[i].right_fork = &cleanup->forks[0];
 		else
 			cleanup->threads[i].right_fork = &cleanup->forks[i + 1];
+		cleanup->threads[i].flag = -1;
+		pthread_mutex_init(&cleanup->threads->flag_mutex, NULL);
 		pthread_mutex_init(&cleanup->forks[i], NULL);
 		pthread_create(&cleanup->threads[i].thread, NULL, routine, &cleanup->threads[i]);
 		pthread_detach(cleanup->threads[i].thread);

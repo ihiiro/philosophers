@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:31:11 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/03/19 15:38:24 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/03/19 16:22:48 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ typedef struct s_threads
 	pthread_t		thread;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
+	int				flag;
+	pthread_mutex_t	flag_mutex;
 }				t_threads;
 
 typedef struct s_cleanup
@@ -52,6 +54,6 @@ void		clean(t_cleanup cleanup);
 
 void		*routine(void *values);
 
-t_threads	*init_thread_values(t_sim_values sim_values, t_cleanup *cleanup);
+t_threads	*init_threads(t_sim_values sim_values, t_cleanup *cleanup);
 
 #endif

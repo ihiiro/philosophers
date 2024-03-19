@@ -6,21 +6,64 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 19:47:33 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/03/19 15:11:58 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/03/19 16:43:24 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
+#include <sys/time.h>
 #include "philo.h"
 
-#include <stdio.h>
+static long	get_time(void)
+{
+	struct timeval	tv;
+	long			timestamp_ms;
+
+	gettimeofday(&tv, NULL);
+	timestamp_ms = tv.tv_sec * 1000 + tv.tv_usec / 1000;
+	return (timestamp_ms);
+}
+
+static void	report(int id, int flag, long start_ms)
+{
+	long	timestamp_ms;
+
+	timestamp_ms = get_time() - start_ms;	
+	if (flag == -1)
+		printf("%ld %d is active\n", timestamp_ms, id);
+	else if (flag == 0)
+		printf("%ld %d is eating\n", timestamp_ms, id);
+	else if (flag == 1)
+		printf("%ld %d is sleeping\n", timestamp_ms, id);
+	else if (flag == 2)
+		printf("%ld %d is thinking\n", timestamp_ms, id);
+}
+
+static void	launch_monitor(t_sim_values *sim_values, t_threads *threads, long start_ms)
+{
+	int	i;
+
+	while (1)
+	{
+		i = -1;
+		while (++i < sim_values->n)
+		{
+			pthread_mutex_lock(&threads[i].flag_mutex);
+			report(i + 1, threads[i].flag, start_ms);
+			pthread_mutex_unlock(&threads[i].flag_mutex);
+		}
+	}
+}
+
 void	main_logic(int argc, char **argv)
 {
 	t_sim_values	sim_values;
 	t_threads		*threads;
 	t_cleanup		cleanup;
+	int				i;
 
 	init_sim_values(argc, argv, &sim_values);
-	threads = init_thread_values(sim_values, &cleanup);
-	while (1);
+	threads = init_threads(sim_values, &cleanup);
+	launch_monitor(&sim_values, threads, get_time());
 	clean(cleanup);
 }
