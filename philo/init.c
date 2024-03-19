@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 20:21:22 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/03/19 20:46:31 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/03/19 21:49:27 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,11 @@ t_threads	*init_threads(t_sim_values sim_values, t_cleanup *cleanup)
 
 	i = -1;
 	cleanup->threads = (t_threads *)malloc(sizeof(t_threads) * sim_values.n);
-	cleanup->forks = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * sim_values.n);
+	cleanup->forks = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t)
+			* sim_values.n);
 	while (++i < sim_values.n)
 	{
+		cleanup->threads[i].lastmeal_ms = get_time();
 		cleanup->threads[i].id = i + 1;
 		cleanup->threads[i].sim_values = sim_values;
 		cleanup->threads[i].left_fork = &cleanup->forks[i];
@@ -33,8 +35,8 @@ t_threads	*init_threads(t_sim_values sim_values, t_cleanup *cleanup)
 		cleanup->threads[i].flag = -1;
 		pthread_mutex_init(&cleanup->threads->flag_mutex, NULL);
 		pthread_mutex_init(&cleanup->forks[i], NULL);
-		pthread_create(&cleanup->threads[i].thread, NULL, routine, &cleanup->threads[i]);
-		// msleep(1);
+		pthread_create(&cleanup->threads[i].thread, NULL,
+			routine, &cleanup->threads[i]);
 		pthread_detach(cleanup->threads[i].thread);
 	}
 	return (cleanup->threads);
