@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:31:11 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/03/19 00:31:45 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/03/19 00:36:56 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ typedef struct s_sim_values
 
 typedef struct s_threads
 {
-	pthread_t	thread;
-	int			id;
+	pthread_t		thread;
+	int				id;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
 }				t_threads;
@@ -37,21 +37,21 @@ typedef struct s_cleanup
 	pthread_mutex_t	*forks;
 }					t_cleanup;
 
-int		real_argc(int argc);
+int			real_argc(int argc);
 
-_Bool	is_digits(int argc, char **argv);
+_Bool		is_digits(int argc, char **argv);
 
-_Bool	validate_numbers(int argc, char **argv);
+_Bool		validate_numbers(int argc, char **argv);
 
-long	satoi(char *str);
+long		satoi(char *str);
 
-void	main_logic(int argc, char **argv);
+void		main_logic(int argc, char **argv);
 
-void	init_sim_values(int argc, char **argv, t_sim_values *sim_values);
+void		init_sim_values(int argc, char **argv, t_sim_values *sim_values);
 
-void	clean(t_cleanup cleanup);
+void		clean(t_cleanup cleanup);
 
-void	*routine(void *values);
+void		*routine(void *values);
 
 t_threads	*init_thread_values(t_sim_values sim_values, t_cleanup *cleanup);
 
