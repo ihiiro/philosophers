@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:31:11 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/03/19 00:36:56 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/03/19 15:38:24 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ typedef struct s_sim_values
 typedef struct s_threads
 {
 	pthread_t		thread;
-	int				id;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
 }				t_threads;

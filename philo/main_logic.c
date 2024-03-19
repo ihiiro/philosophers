@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 19:47:33 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/03/19 00:32:48 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/03/19 15:11:58 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@ void	main_logic(int argc, char **argv)
 
 	init_sim_values(argc, argv, &sim_values);
 	threads = init_thread_values(sim_values, &cleanup);
-	// while (1);
+	while (1);
 	clean(cleanup);
 }
