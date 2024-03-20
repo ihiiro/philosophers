@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:31:11 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/03/19 21:26:32 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/03/20 17:54:19 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ typedef struct s_threads
 	t_sim_values	sim_values;
 	int				id;
 	long			lastmeal_ms;
+	int				opt;
+	pthread_mutex_t	opt_mutex;
 }				t_threads;
 
 typedef struct s_cleanup

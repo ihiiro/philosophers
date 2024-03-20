@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 19:47:33 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/03/20 14:28:48 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/03/20 18:50:15 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,22 @@ static void	launch_monitor(t_sim_values *sim_values, t_threads *threads,
 	long start_ms)
 {
 	int		i;
+	int		opts;
 
+	opts = sim_values->opt * sim_values->n;
 	while (1)
 	{
 		i = -1;
 		while (++i < sim_values->n)
 		{
 			pthread_mutex_lock(&threads[i].flag_mutex);
+			if (opts == 0)
+				return ;
 			if (threads[i].flag == 1)
+			{
+				opts--;
 				threads[i].lastmeal_ms = get_time();
+			}
 			if (get_time() - threads[i].lastmeal_ms > sim_values->ttd)
 			{
 				printf("%ld %d died\n", get_time() - start_ms, i + 1);
@@ -68,5 +75,5 @@ void	main_logic(int argc, char **argv)
 	init_sim_values(argc, argv, &sim_values);
 	threads = init_threads(sim_values, &cleanup);
 	launch_monitor(&sim_values, threads, get_time());
-	// clean(cleanup);
+	clean(cleanup);
 }
