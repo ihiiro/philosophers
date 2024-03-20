@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 00:17:05 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/03/20 13:59:57 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/03/20 14:58:39 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	*routine(void *values)
 			pthread_mutex_lock(vals->left_fork);
 		else
 			pthread_mutex_lock(vals->right_fork);
+		if (vals->id % 2 == 0)
+			usleep(5);
 		set_flag(4, &vals->flag, &vals->flag_mutex);
 		while (1)
 		{
