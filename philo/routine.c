@@ -6,13 +6,12 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 00:17:05 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/03/21 22:00:21 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/03/21 22:20:40 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "philo.h"
-
 #include <unistd.h>
 
 void	set_flag(int val, int *flag, pthread_mutex_t *mutex)

@@ -6,14 +6,13 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 19:47:33 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/03/21 22:13:57 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/03/21 22:21:00 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/time.h>
-#include <string.h>
 #include "philo.h"
 
 static void	report(int id, int flag, long start_ms)
