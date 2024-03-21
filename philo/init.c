@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 20:21:22 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/03/20 17:54:31 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/03/21 22:13:27 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,5 @@ void	init_sim_values(int argc, char **argv, t_sim_values *sim_values)
 	sim_values->ttd = satoi(argv[2]);
 	sim_values->tte = satoi(argv[3]);
 	sim_values->tts = satoi(argv[4]);
+	sim_values->opts = sim_values->n * sim_values->opt;
 }

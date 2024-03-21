@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 19:47:33 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/03/21 14:46:50 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/03/21 22:13:57 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,33 +34,39 @@ static void	report(int id, int flag, long start_ms)
 		printf("%ld %d is thinking\n", timestamp_ms, id);
 }
 
+static int	check_death(long lastmeal_ms, int ttd, long start_ms, int id)
+{
+	if (get_time() - lastmeal_ms > ttd && lastmeal_ms != -1)
+	{
+		printf("%ld %d died\n", get_time() - start_ms, id);
+		return (1);
+	}
+	return (0);
+}
+
 static void	launch_monitor(t_sim_values *sim_values, t_threads *threads,
 	long start_ms)
 {
 	int		i;
-	int		opts;
 
-	opts = sim_values->opt * sim_values->n;
 	while (1)
 	{
 		i = -1;
 		while (++i < sim_values->n)
 		{
 			pthread_mutex_lock(&threads[i].flag_mutex);
-			if (opts == 0)
+			if (sim_values->opts == 0)
 				return ;
 			if (threads[i].flag == 1)
 			{
-				opts--;
+				sim_values->opts--;
 				threads[i].lastmeal_ms = get_time();
 			}
 			if (threads[i].flag == -3)
 				threads[i].lastmeal_ms = -1;
-			if (get_time() - threads[i].lastmeal_ms > sim_values->ttd && threads[i].lastmeal_ms != -1)
-			{
-				printf("%ld %d died\n", get_time() - start_ms, i + 1);
+			if (check_death(threads[i].lastmeal_ms, sim_values->ttd,
+					start_ms, i + 1))
 				return ;
-			}
 			report(i + 1, threads[i].flag, start_ms);
 			threads[i].flag = -2;
 			pthread_mutex_unlock(&threads[i].flag_mutex);
