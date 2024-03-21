@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 19:47:33 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/03/21 22:21:00 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/03/21 23:39:45 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,25 @@ static void	report(int id, int flag, long start_ms)
 		printf("%ld %d is thinking\n", timestamp_ms, id);
 }
 
-static int	check_death(long lastmeal_ms, int ttd, long start_ms, int id)
+static int	check_death(t_sim_values sim_values, t_threads *threads,
+	long start_ms)
 {
-	if (get_time() - lastmeal_ms > ttd && lastmeal_ms != -1)
+	int	i;
+
+	i = -1;
+	while (++i < sim_values.n)
 	{
-		printf("%ld %d died\n", get_time() - start_ms, id);
-		return (1);
+		if (get_time() - threads[i].lastmeal_ms > sim_values.ttd
+			&& threads[i].lastmeal_ms != -1)
+		{
+			printf("%ld %d died\n", get_time() - start_ms, i + 1);
+			return (1);
+		}
 	}
 	return (0);
 }
 
+#include <unistd.h>
 static void	launch_monitor(t_sim_values *sim_values, t_threads *threads,
 	long start_ms)
 {
@@ -50,6 +59,8 @@ static void	launch_monitor(t_sim_values *sim_values, t_threads *threads,
 
 	while (1)
 	{
+		if (check_death(*sim_values, threads, start_ms))
+			return ;
 		i = -1;
 		while (++i < sim_values->n)
 		{
@@ -63,9 +74,6 @@ static void	launch_monitor(t_sim_values *sim_values, t_threads *threads,
 			}
 			if (threads[i].flag == -3)
 				threads[i].lastmeal_ms = -1;
-			if (check_death(threads[i].lastmeal_ms, sim_values->ttd,
-					start_ms, i + 1))
-				return ;
 			report(i + 1, threads[i].flag, start_ms);
 			threads[i].flag = -2;
 			pthread_mutex_unlock(&threads[i].flag_mutex);

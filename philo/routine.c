@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 00:17:05 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/03/21 22:20:40 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/03/21 23:42:14 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	even_odd(t_threads *vals)
 	else
 		pthread_mutex_lock(vals->right_fork);
 	if (vals->id % 2 == 0)
-		usleep(5);
+		usleep(10);
 	set_flag(4, &vals->flag, &vals->flag_mutex);
 	while (1)
 	{
@@ -39,6 +39,7 @@ static void	even_odd(t_threads *vals)
 			break ;
 		}
 		pthread_mutex_unlock(&vals->flag_mutex);
+		usleep(100);
 	}
 }
 
@@ -47,6 +48,7 @@ void	*routine(void *values)
 	t_threads	*vals;
 
 	vals = (t_threads *)values;
+	usleep(5);
 	while (vals->opt)
 	{
 		even_odd(vals);
