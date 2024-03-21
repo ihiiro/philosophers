@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 19:47:33 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/03/20 18:50:15 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/03/21 14:46:50 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,9 @@ static void	launch_monitor(t_sim_values *sim_values, t_threads *threads,
 				opts--;
 				threads[i].lastmeal_ms = get_time();
 			}
-			if (get_time() - threads[i].lastmeal_ms > sim_values->ttd)
+			if (threads[i].flag == -3)
+				threads[i].lastmeal_ms = -1;
+			if (get_time() - threads[i].lastmeal_ms > sim_values->ttd && threads[i].lastmeal_ms != -1)
 			{
 				printf("%ld %d died\n", get_time() - start_ms, i + 1);
 				return ;

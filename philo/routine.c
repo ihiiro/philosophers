@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 00:17:05 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/03/20 18:49:14 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/03/21 14:39:23 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ void	*routine(void *values)
 		set_flag(2, &vals->flag, &vals->flag_mutex);
 		msleep(vals->sim_values.tts);
 		set_flag(3, &vals->flag, &vals->flag_mutex);
+		if (vals->opt == 0)
+			set_flag(-3, &vals->flag, &vals->flag_mutex);
 	}
 	return (NULL);
 }
