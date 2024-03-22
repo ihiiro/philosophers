@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 19:47:33 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/03/21 23:39:45 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/03/22 15:39:57 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ static int	check_death(t_sim_values sim_values, t_threads *threads,
 	return (0);
 }
 
-#include <unistd.h>
 static void	launch_monitor(t_sim_values *sim_values, t_threads *threads,
 	long start_ms)
 {
@@ -86,9 +85,16 @@ void	main_logic(int argc, char **argv)
 	t_sim_values	sim_values;
 	t_threads		*threads;
 	t_cleanup		cleanup;
+	int				i;
 
 	init_sim_values(argc, argv, &sim_values);
 	threads = init_threads(sim_values, &cleanup);
 	launch_monitor(&sim_values, threads, get_time());
+	i = 0;
+	while (i < sim_values.n)
+	{
+		pthread_mutex_destroy(&cleanup.forks[i]);
+		i++;
+	}
 	clean(cleanup);
 }
