@@ -6,7 +6,7 @@
 #    By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/23 14:21:07 by yel-yaqi          #+#    #+#              #
-#    Updated: 2024/03/23 15:21:03 by yel-yaqi         ###   ########.fr        #
+#    Updated: 2024/03/24 18:55:43 by yel-yaqi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ all: bonus
 bonus: $(NAME)
 
 $(NAME): $(SOURCES) Makefile #NOTE: ADD CFLAGS!!
-	cc $(SOURCES) -o $@
+	cc $(CFLAGS) $(SOURCES) -o $@
 
 clean:
 	rm $(NAME)

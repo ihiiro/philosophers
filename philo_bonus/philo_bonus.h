@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:31:11 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/03/24 17:17:46 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/03/24 18:26:50 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ typedef struct s_sim_values
 	sem_t	*forks_sem;
 	sem_t	*printf_sem;
 	sem_t	*opts_sem;
+	int		end_sim;
+	sem_t	*endsim_sem;
+	pid_t	*pids;
 }		t_sim_values;
 
 typedef struct s_threads
@@ -42,6 +45,20 @@ typedef struct s_cleanup
 	t_threads		*threads;
 	pthread_mutex_t	*forks;
 }					t_cleanup;
+
+typedef struct s_monitor
+{
+	sem_t	*lastmeal_sem;
+	int		id;
+	long	start_ms;
+	sem_t	*endsim_sem;
+	long	lastmeal_ms;
+	int		ttd;
+	sem_t	*printf_sem;
+	int		*end_sim;
+	int		*pids;
+	int		n;
+}			t_monitor;
 
 int			real_argc(int argc);
 
