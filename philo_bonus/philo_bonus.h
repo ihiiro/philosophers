@@ -6,22 +6,25 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:31:11 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/03/23 15:27:00 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/03/24 17:17:46 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_BONUS_H
 # define PHILO_BONUS_H
 # include <pthread.h>
+# include <semaphore.h>
 
 typedef struct s_sim_values
 {
-	int	n;
-	int	ttd;
-	int	tte;
-	int	tts;
-	int	opt;
-	int	opts;
+	int		n;
+	int		ttd;
+	int		tte;
+	int		tts;
+	int		opt;
+	sem_t	*forks_sem;
+	sem_t	*printf_sem;
+	sem_t	*opts_sem;
 }		t_sim_values;
 
 typedef struct s_threads

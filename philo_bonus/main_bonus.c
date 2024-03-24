@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 15:20:11 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/03/23 15:22:11 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/03/24 17:13:27 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	if (!validate_numbers(argc, argv))
 		return (EXIT_FAILURE);
-	// main_logic(argc, argv);
+	main_logic(argc, argv);
 	return (EXIT_SUCCESS);
 }
