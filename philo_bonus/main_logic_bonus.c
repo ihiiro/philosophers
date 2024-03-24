@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 15:21:15 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/03/24 20:55:23 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/03/24 21:43:33 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	report(char *msg, sem_t *printf_sem, int id, long start_ms)
 		sem_post(printf_sem);
 }
 
-static void	*monitor_routine(void *data)
+void	*monitor_routine(void *data)
 {
 	t_monitor	*mdata;
 
@@ -47,22 +47,11 @@ static void	*monitor_routine(void *data)
 static void	process_routine(t_sim_values psim_values, t_sim_values *sim_values,
 	int id, long start_ms)
 {
-	pthread_t	monitor;
 	t_monitor	data;
 
 	sem_unlink("lastmeal_sem");
-	data.lastmeal_sem = sem_open("lastmeal_sem", O_CREAT, 0644, 1);
-	data.lastmeal_ms = get_time();
-	data.id = id;
+	init_monitor(id, &data, sim_values, psim_values);
 	data.start_ms = start_ms;
-	data.ttd = psim_values.ttd;
-	data.endsim_sem = sim_values->endsim_sem;
-	data.end_sim = &sim_values->end_sim;
-	data.printf_sem = sim_values->printf_sem;
-	data.pids = psim_values.pids;
-	data.n = psim_values.n;
-	pthread_create(&monitor, NULL, monitor_routine, &data);
-	pthread_detach(monitor);
 	while (psim_values.opt)
 	{
 		sem_wait(sim_values->forks_sem);
@@ -102,8 +91,6 @@ static pid_t	*launch_processes(t_sim_values *sim_values, long start_ms)
 	return (pids);
 }
 
-
-
 void	main_logic(int argc, char **argv)
 {
 	t_sim_values	sim_values;
@@ -117,7 +104,7 @@ void	main_logic(int argc, char **argv)
 		if (waitpid(-1, &status, 0) <= 0)
 			break ;
 		if (status != EXIT_SUCCESS)
-			break;
+			break ;
 	}
 	i = -1;
 	while (++i < sim_values.n)
@@ -125,6 +112,5 @@ void	main_logic(int argc, char **argv)
 	sem_unlink("forks_sem");
 	sem_unlink("printf_sem");
 	sem_unlink("opts_sem");
-	sem_unlink("endsim_sem");
 	exit(EXIT_SUCCESS);
 }

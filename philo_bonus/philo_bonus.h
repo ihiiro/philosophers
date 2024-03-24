@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 17:31:11 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/03/24 18:26:50 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/03/24 21:43:49 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ typedef struct s_monitor
 	int		ttd;
 	sem_t	*printf_sem;
 	int		*end_sim;
-	int		*pids;
 	int		n;
 }			t_monitor;
 
@@ -77,6 +76,11 @@ void		init_sim_values(int argc, char **argv, t_sim_values *sim_values);
 void		clean(t_cleanup cleanup);
 
 void		msleep(long duration_ms);
+
+void		init_monitor(int id, t_monitor *data, t_sim_values *sim_values,
+				t_sim_values psim_values);
+
+void		*monitor_routine(void *data);
 
 t_threads	*init_threads(t_sim_values sim_values, t_cleanup *cleanup);
 
