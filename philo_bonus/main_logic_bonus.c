@@ -6,7 +6,7 @@
 /*   By: yel-yaqi <yel-yaqi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 15:21:15 by yel-yaqi          #+#    #+#             */
-/*   Updated: 2024/03/24 18:56:49 by yel-yaqi         ###   ########.fr       */
+/*   Updated: 2024/03/24 20:55:23 by yel-yaqi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static void	process_routine(t_sim_values psim_values, t_sim_values *sim_values,
 		msleep(psim_values.tts);
 		report("is thinking", sim_values->printf_sem, id, start_ms);
 	}
-	exit(0);
+	exit(EXIT_SUCCESS);
 }
 
 static pid_t	*launch_processes(t_sim_values *sim_values, long start_ms)
@@ -116,7 +116,7 @@ void	main_logic(int argc, char **argv)
 	{
 		if (waitpid(-1, &status, 0) <= 0)
 			break ;
-		if (WIFEXITED(status) && WEXITSTATUS(status) == EXIT_FAILURE)
+		if (status != EXIT_SUCCESS)
 			break;
 	}
 	i = -1;
@@ -126,5 +126,5 @@ void	main_logic(int argc, char **argv)
 	sem_unlink("printf_sem");
 	sem_unlink("opts_sem");
 	sem_unlink("endsim_sem");
-	exit(EXIT_SUCCESS); // check later if pids is reachable using atexit()
+	exit(EXIT_SUCCESS);
 }
